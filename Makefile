@@ -1,7 +1,7 @@
 CC ?= gcc
 CLANG := clang
 LIBFOLDER := ./lib
-BUILDDIR := ./build32
+BUILDDIR := ./build
 LIBHEADER := $(wildcard $(LIBFOLDER)/*.h)
 HEADERCFILES := $(patsubst %.h, %.c, $(LIBHEADER))
 HEADEROFILES := $(patsubst %.c, %.o, $(HEADERCFILES))
