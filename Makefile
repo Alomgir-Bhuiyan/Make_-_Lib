@@ -45,8 +45,8 @@ $(MAINOBJS): $(MAINFILES)
 	$(CC) -c $^ -o $@
 
 asm: $(ASMDEST) $(ASMDEST64)
-	$(CC) -S $(MAINFILES) -o $(ASMDEST32)/$(patsubst %.c,%.s,$(MAINFILES))
-	$(CLANG) --target=aarch64-linux-android21 -S $(MAINFILES) -o $(patsubst %.c, %.s, $(MAINFILES))
+	$(CLANG) --target=armv7-linux-androideabi21 -S $(MAINFILES) -o $(ASMDEST32)/$(patsubst %.c,%.s, $(MAINFILES))
+	$(CLANG) --target=aarch64-linux-android21 -S $(MAINFILES) -o $(ASMDEST64)/$(patsubst %.c,%.s, $(MAINFILES))
 
 run: build
 	./$(BUILDDIR)/static/$(BINARY)
@@ -55,5 +55,6 @@ srun: us
 	LD_LIBRARY_PATH=$(LIBFOLDER) $(BUILDDIR)/shared/$(BINARY)
 
 clean:
-	rm -f $(HEADEROFILES) $(HEADERSOFILES) $(MAINOBJS) $(BUILDDIR)/static/$(BINARY) $(BUILDDIR)/shared/$(BINARY)
+	rm -f $(HEADEROFILES) $(HEADERSOFILES) $(MAINOBJS) $(BUILDDIR)/static/$(BINARY) $(BUILDDIR)/shared/$(BINARY) $(ASMDEST64)/*.s $(ASMDEST32)/*.s
+
 
